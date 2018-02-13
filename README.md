@@ -1,6 +1,6 @@
 # mattermost-mattermail
 
-Installs and configure mattermail for the use with a Mattermost instance.
+Installs and configures mattermail for the use with a Mattermost instance.
 
 ## Requirements
 
@@ -8,13 +8,14 @@ A Debian-based system
 
 ## Role Variables
 
-| Name                                 | Required/Default  | Description                                                                                                                                     |
-|:-------------------------------------|:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
-| `mattermost_mattermail_install_path` | `/opt/mattermail` | Path where to install the mattermail files to                                                                                                   |
-| `mattermost_mattermail_user`         | `www-data`        | User under which mattermail should run. The user has to exist                                                                                   |
-| `mattermost_mattermail_group`        | `www-data`        | Group under which mattermail should run. The group has to exist                                                                                 |
-| `mattermost_mattermail_version`      | `4.0.0-beta.2`    | Version number to download and install. See the [mattermail repository](https://github.com/rodcorsi/mattermail)                                 |
-| `mattermost_mattermail_config`       | See below         | Object that mostly configures mattermail. For more information see below or the [mattermail repository](https://github.com/rodcorsi/mattermail) |
+| Name                                 | Required/Default   | Description                                                                                                                                      |
+|:-------------------------------------|:-------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `global_cache_dir`                   | :heavy_check_mark: | Cache directory to download Mattermost files to                                                                                                  |
+| `mattermost_mattermail_install_path` | `/opt/mattermail`  | Path where to install the mattermail files to                                                                                                    |
+| `mattermost_mattermail_user`         | `www-data`         | User under which mattermail should run. The user has to exist.                                                                                   |
+| `mattermost_mattermail_group`        | `www-data`         | Group under which mattermail should run. The group has to exist.                                                                                 |
+| `mattermost_mattermail_version`      | `4.0.0-beta.2`     | Version number to download and install. See the [mattermail releases](https://github.com/rodcorsi/mattermail/releases).                          |
+| `mattermost_mattermail_config`       | See below          | Object that mostly configures mattermail. For more information see below or the [mattermail repository](https://github.com/rodcorsi/mattermail). |
 
 ### `mattermost_mattermail_config`
 We use the structure of the config file that is provided by [mattermail repository](https://github.com/rodcorsi/mattermail)
@@ -32,7 +33,7 @@ The config object is converted to json, so spelling matters.
 | Channels          | :heavy_check_mark:                                                          | List of channels where the email will be posted. You can use `#channel` or `@username`                               |
 | Email             | :heavy_check_mark:                                                          | Configuration of Email [(details)](https://github.com/stuvusIT/mattermost-mattermail#email)                          |
 | Mattermost        | :heavy_check_mark:                                                          | Configuration of Mattermost [(details)](https://github.com/stuvusIT/mattermost-mattermail#mattermost)                |
-| MailTemplate      | `incoming_envelope: _From: **{{.From}}**_\n>_{{.Subject}}_\n\n{{.Message}}` | Template used to format message to post [(details)](https://github.com/stuvusIT/mattermost-mattermail#mailtemplate)  |
+| MailTemplate      | `:incoming_envelope: _From: **{{.From}}**_\n>_{{.Subject}}_\n\n{{.Message}}` | Template used to format message to post [(details)](https://github.com/stuvusIT/mattermost-mattermail#mailtemplate)  |
 | LinesToPreview    | `10`                                                                        | Number of email lines that will be posted                                                                            |
 | Attachment        | `true`                                                                      | Inform if attachments will be posted in Mattermost                                                                   |
 | Disabled          | `false`                                                                     | Disable this profile                                                                                                 |
@@ -48,8 +49,8 @@ Email configuration, used to access IMAP server
 | ImapServer        | :heavy_check_mark: | Address of imap server with port number ex: _imap.example.com:143_ |
 | Username          | :heavy_check_mark: | Email address or username used authenticate on email server        |
 | Password          | :heavy_check_mark: | Password used authenticate on email server                         |
-| StartTLS          | false              | Enable StartTLS connection if server supports                      |
-| TLSAcceptAllCerts | false              | Accept insecure certificates with TLS connection                   |
+| StartTLS          | `false`            | Enable StartTLS connection if server supports                      |
+| TLSAcceptAllCerts | `false`            | Accept insecure certificates with TLS connection                   |
 
 #### Mattermost
 
@@ -57,11 +58,11 @@ Mattermost configuration
 
 | Field    | Required/Default   | Description                                                                                                                |
 |----------|:------------------:|----------------------------------------------------------------------------------------------------------------------------|
-| Server   | :heavy_check_mark: | Address of mattermost server. Please inform protocol and port if its necessary ex: _<https://mattermost.example.com:8065>_ |
+| Server   | :heavy_check_mark: | Address of Mattermost server. Please inform protocol and port if its necessary ex: _<https://mattermost.example.com:8065>_ |
 | Team     | :heavy_check_mark: | Team name. You can find teams name by [(URL)](https://github.com/stuvusIT/mattermost-mattermail#teamchannel)               |
-| User     | :heavy_check_mark: | User used to authenticate on Mattermos server                                                                              |
-| Password | :heavy_check_mark: | Password used to authenticate on Mattermos server                                                                          |
-| UseAPIv3 | true               | Set to use Mattermost Api V3                                                                                               |
+| User     | :heavy_check_mark: | User used to authenticate on Mattermost server                                                                             |
+| Password | :heavy_check_mark: | Password used to authenticate on Mattermost server                                                                         |
+| UseAPIv3 | `true`             | Set to use Mattermost Api V3                                                                                               |
 
 #### MailTemplate
 
