@@ -1,0 +1,12 @@
+[Unit]
+Description=Mattermost mattermail
+
+[Service]
+Type=simple
+User={{ mattermost_mattermail_user }}
+Group={{ mattermost_mattermail_group }}
+ExecStart={{ mattermost_mattermail_install_path }}/mattermail > /var/log/mattermail.log
+WorkingDirectory={{ mattermost_mattermail_install_path }}
+
+[Install]
+WantedBy=multi-user.target
