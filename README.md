@@ -26,18 +26,18 @@ The config object is converted to json, so spelling matters.
 | `Profiles`  | :heavy_check_mark: | List of objects. For details see below |
 
 #### `Profiles`
-| Field             | Required/Default   | Description                                                                                               |
-|-------------------|:------------------:|-----------------------------------------------------------------------------------------------------------|
-| Name              | :heavy_check_mark: | Name of profile, used to log                                                                              |
-| Channels          | :heavy_check_mark: | List of channels where the email will be posted. You can use `#channel` or `@username`                    |
-| Email             | :heavy_check_mark: | Configuration of Email [(details)](https://github.com/stuvusIT/mattermost-mattermail#email)                          |
-| Mattermost        | :heavy_check_mark: | Configuration of Mattermost [(details)](https://github.com/stuvusIT/mattermost-mattermail#mattermost)                |
-| MailTemplate      | ` `                | Template used to format message to post [(details)](https://github.com/stuvusIT/mattermost-mattermail#mailtemplate)  |
-| LinesToPreview    | `10`               | Number of email lines that will be posted                                                                 |
-| Attachment        | `true`             | Inform if attachments will be posted in Mattermost                                                        |
-| Disabled          | `false`            | Disable this profile                                                                                      |
-| RedirectBySubject | `true`             | Inform if redirect email by subject [(details)](https://github.com/stuvusIT/mattermost-mattermail#redirectbysubject) |
-| Filter            | ` `                | Filter used to redirect email [(details)](https://github.com/stuvusIT/mattermost-mattermail#filter)                  |
+| Field             | Required/Default                                                            | Description                                                                                                          |
+|-------------------|:---------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------------------------|
+| Name              | :heavy_check_mark:                                                          | Name of profile, used to log                                                                                         |
+| Channels          | :heavy_check_mark:                                                          | List of channels where the email will be posted. You can use `#channel` or `@username`                               |
+| Email             | :heavy_check_mark:                                                          | Configuration of Email [(details)](https://github.com/stuvusIT/mattermost-mattermail#email)                          |
+| Mattermost        | :heavy_check_mark:                                                          | Configuration of Mattermost [(details)](https://github.com/stuvusIT/mattermost-mattermail#mattermost)                |
+| MailTemplate      | `incoming_envelope: _From: **{{.From}}**_\n>_{{.Subject}}_\n\n{{.Message}}` | Template used to format message to post [(details)](https://github.com/stuvusIT/mattermost-mattermail#mailtemplate)  |
+| LinesToPreview    | `10`                                                                        | Number of email lines that will be posted                                                                            |
+| Attachment        | `true`                                                                      | Inform if attachments will be posted in Mattermost                                                                   |
+| Disabled          | `false`                                                                     | Disable this profile                                                                                                 |
+| RedirectBySubject | `true`                                                                      | Inform if redirect email by subject [(details)](https://github.com/stuvusIT/mattermost-mattermail#redirectbysubject) |
+| Filter            | ` `                                                                         | Filter used to redirect email [(details)](https://github.com/stuvusIT/mattermost-mattermail#filter)                  |
 
 #### Email
 
@@ -56,9 +56,9 @@ Email configuration, used to access IMAP server
 Mattermost configuration
 
 | Field    | Required/Default   | Description                                                                                                                |
-|----------|:------------------:|----------------------------------------------------------------------------------------------------------------------------|:---:|--|
+|----------|:------------------:|----------------------------------------------------------------------------------------------------------------------------|
 | Server   | :heavy_check_mark: | Address of mattermost server. Please inform protocol and port if its necessary ex: _<https://mattermost.example.com:8065>_ |
-| Team     | :heavy_check_mark: | Team name. You can find teams name by [(URL)](https://github.com/stuvusIT/mattermost-mattermail#teamchannel)                          |
+| Team     | :heavy_check_mark: | Team name. You can find teams name by [(URL)](https://github.com/stuvusIT/mattermost-mattermail#teamchannel)               |
 | User     | :heavy_check_mark: | User used to authenticate on Mattermos server                                                                              |
 | Password | :heavy_check_mark: | Password used to authenticate on Mattermos server                                                                          |
 | UseAPIv3 | true               | Set to use Mattermost Api V3                                                                                               |
