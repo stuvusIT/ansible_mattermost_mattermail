@@ -10,7 +10,7 @@ A Debian-based system
 
 | Name                                 | Required/Default   | Description                                                                                                                                      |
 |:-------------------------------------|:-------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------|
-| `global_cache_dir`                   | :heavy_check_mark: | Cache directory to download Mattermost files to                                                                                                  |
+| `global_cache_dir`                   | :heavy_check_mark: | Cache directory to download Mattermost files to on the execution machine running this playbook.                                                  |
 | `mattermost_mattermail_install_path` | `/opt/mattermail`  | Path where to install the mattermail files to                                                                                                    |
 | `mattermost_mattermail_user`         | `www-data`         | User under which mattermail should run. The user has to exist.                                                                                   |
 | `mattermost_mattermail_group`        | `www-data`         | Group under which mattermail should run. The group has to exist.                                                                                 |
@@ -59,7 +59,7 @@ Mattermost configuration
 | Field    | Required/Default   | Description                                                                                                                |
 |----------|:------------------:|----------------------------------------------------------------------------------------------------------------------------|
 | Server   | :heavy_check_mark: | Address of Mattermost server. Please inform protocol and port if its necessary ex: _<https://mattermost.example.com:8065>_ |
-| Team     | :heavy_check_mark: | Team name. You can find teams name by [(URL)](https://github.com/stuvusIT/mattermost-mattermail#teamchannel)               |
+| Team     | :heavy_check_mark: | Team name                                                                                                                  |
 | User     | :heavy_check_mark: | User used to authenticate on Mattermost server                                                                             |
 | Password | :heavy_check_mark: | Password used to authenticate on Mattermost server                                                                         |
 | UseAPIv3 | `true`             | Set to use Mattermost Api V3                                                                                               |
@@ -91,17 +91,15 @@ If the option `RedirectBySubject` is `true` the Mattermail will try to redirect 
 
 This option is used to redirect email following the rules.
 
-```javascript
-"Filter":            [
-    /* if subject contains 'Feature' redirect to #feature */
-    {"Subject":"Feature", "Channel":"#feature"},
-
-    /* if from contains 'test@gmail.com' and subject contains 'to me' redirect to @test2*/
-    {"From":"test@gmail.com", "Subject":"To Me", "Channel":"@test2"},
-
-    /* if from contains '@companyb.com' redirect to #companyb */
-    {"From":"@companyb.com", "Channel":"#companyb"} /**/
-]
+```yml
+Filter:
+  - Subject: Feature
+    Channel: #feature
+  - From: test@gmail.com
+    Subject: To Me
+    Channel: @test2
+  - From: @companyb.com
+    Channel: #companyb
 ```
 
 ## Example Playbook
