@@ -1,0 +1,5 @@
+---
+mattermost_mattermail_version: 4.0.0-beta.2
+mattermost_mattermail_install_path: /opt/mattermail
+mattermost_mattermail_user: www-data
+mattermost_mattermail_group: www-data

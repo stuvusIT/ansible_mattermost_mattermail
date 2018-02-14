@@ -1,0 +1,10 @@
+---
+- name: Restart mattermost-mattermail.service
+  systemd:
+    name: mattermost-mattermail.service
+    state: restarted
+    enabled: True
+
+- name: Reload systemd daemon
+  systemd:
+    daemon_reload: yes

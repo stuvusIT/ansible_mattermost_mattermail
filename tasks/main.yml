@@ -1,0 +1,45 @@
+---
+- name: Download latest version from GitHub
+  get_url:
+    url: 'https://github.com/rodcorsi/mattermail/releases/download/{{ mattermost_mattermail_version }}/mattermail-{{ mattermost_mattermail_version }}.linux.am64.tar.gz'
+    dest: "{{ global_cache_dir | mandatory }}/"
+  become: false
+  delegate_to: localhost
+
+- name: Create install directory
+  file:
+    path: "{{ mattermost_mattermail_install_path }}"
+    state: directory
+    mode: 0755
+
+- name: Unpack Mattermost archive
+  unarchive: 
+    src: "{{ global_cache_dir }}/mattermail-{{ mattermost_mattermail_version }}.linux.am64.tar.gz"
+    dest: "{{ mattermost_mattermail_install_path }}/"
+  args:
+    creates: "{{ mattermost_mattermail_install_path }}/mattermail"
+
+- name: Set folder permissions
+  file:
+    path: "{{ mattermost_mattermail_install_path }}/{{ mattermost_mattermail_config.Directory }}"
+    owner: "{{ mattermost_mattermail_user }}"
+    group: "{{ mattermost_mattermail_group }}"
+    mode: 0700
+    state: directory
+
+- name: Place systemd service file
+  template:
+    src: mattermost-mattermail.service.j2
+    dest: /etc/systemd/system/mattermost-mattermail.service
+  notify: Reload systemd daemon
+
+- name: Place Config
+  template:
+    src: config.json.j2
+    dest: "{{ mattermost_mattermail_install_path }}/config.json"
+    owner: "{{ mattermost_mattermail_user }}"
+    group: "{{ mattermost_mattermail_group }}"
+    mode: 0600
+  notify:
+    - Restart mattermost-mattermail.service
+
