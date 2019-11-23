@@ -31,7 +31,6 @@
   template:
     src: mattermost-mattermail.service.j2
     dest: /etc/systemd/system/mattermost-mattermail.service
-    validate: systemd-analyze verify %s
   notify: Reload systemd daemon
 
 - name: Place Config
