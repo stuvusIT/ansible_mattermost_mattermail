@@ -110,7 +110,7 @@ mattermost_mattermail_config:
   Directory: "./data/"
   Profiles:
     - Name: Orders
-      Channels: 
+      Channels:
         - orders
       Email:
         ImapServer: imap.example.com:143
